@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TerraTrack ISR — Plataforma de Seguimiento Táctico</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">
+      <span class="logo">◈</span>
+      <div>
+        <h1>TERRATRACK <em>ISR</em></h1>
+        <span class="sub">Intelligence · Surveillance · Reconnaissance</span>
+      </div>
+    </div>
+    <div class="status-chips">
+      <div class="chip" id="chipClock">--:--:--Z</div>
+      <div class="chip ok" id="chipSensors">SENSORES 0/0</div>
+      <div class="chip" id="chipTracks">PISTAS 0</div>
+      <div class="chip warn" id="chipAlerts" hidden>⚠ <span id="alertCount">0</span></div>
+    </div>
+    <div class="controls">
+      <button id="btnPlay" class="btn primary" title="Pausar/Reanudar (Espacio)">⏸ Pausa</button>
+      <label class="speed">VEL
+        <input type="range" id="speed" min="1" max="32" step="1" value="4">
+        <span id="speedVal">4×</span>
+      </label>
+      <button id="btnReset" class="btn">⟲ Reiniciar</button>
+    </div>
+  </header>
+
+  <main id="layout">
+    <!-- Panel izquierdo: sensores -->
+    <aside id="sensorPanel" class="panel">
+      <h2>REDES DE SENSORES</h2>
+      <div id="sensorList" class="list"></div>
+      <h2>CAPAS</h2>
+      <div id="layerToggles" class="list"></div>
+    </aside>
+
+    <!-- Centro: mapa táctico -->
+    <section id="mapWrap">
+      <canvas id="map"></canvas>
+      <div id="mapInfo">
+        <span id="cursorPos">—</span>
+        <span id="scaleBar"></span>
+      </div>
+      <div id="trackTooltip" hidden></div>
+    </section>
+
+    <!-- Panel derecho: pistas -->
+    <aside id="trackPanel" class="panel">
+      <h2>PISTAS ACTIVAS</h2>
+      <div id="trackList" class="list"></div>
+      <h2>REGISTRO DE EVENTOS</h2>
+      <div id="eventLog" class="log"></div>
+    </aside>
+  </main>
+
+  <footer id="detailBar" class="detail" hidden>
+    <div class="dhead">
+      <strong id="dId"></strong>
+      <span id="dType" class="tag"></span>
+      <span id="dClass" class="tag"></span>
+      <button id="dClose" class="btn small">✕</button>
+    </div>
+    <div class="dbody">
+      <div>POS <b id="dPos"></b></div>
+      <div>COG <b id="dCog"></b></div>
+      <div>SOG <b id="dSog"></b></div>
+      <div>ALT <b id="dAlt"></b></div>
+      <div>FUENTES <b id="dSrc"></b></div>
+      <div>CONFIANZA <b id="dConf"></b></div>
+      <div class="dwide">HISTORIAL <b id="dHist"></b></div>
+    </div>
+  </footer>
+</div>
+
+<script type="module" src="js/main.js?v=3"></script>
+</body>
+</html>
