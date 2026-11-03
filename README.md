@@ -51,3 +51,16 @@ js/main.js      — UI y bucle principal (setInterval para sim, rAF para dibujo)
   de modo que la simulación no se congela si la pestaña pierde visibilidad.
 - El `ResizeObserver` redimensiona el canvas cuando el layout está listo.
 - Los imports llevan `?v=` para evitar la caché del navegador durante el desarrollo.
+---
+
+## Ficha del proyecto
+
+| Campo | Valor |
+|---|---|
+| Autor | Belentani / NOIACORE |
+| Época de desarrollo | 2026 |
+| Contacto | [belentani7studio@proton.me](mailto:belentani7studio@proton.me) |
+| Código | https://github.com/belentani7/terratrack-isr |
+| Demo desplegada | https://belentani7.github.io/terratrack-isr/ |
+
+Quality baseline: CI + Dependabot + CodeQL + reglas de agentes por [premium-factory](https://github.com/belentani7/premium-factory-api).
