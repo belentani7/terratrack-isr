@@ -1,0 +1,20 @@
+---
+description: Estándares de código y verificación de este repo
+globs:
+alwaysApply: true
+---
+
+# Reglas del proyecto (belentani7/terratrack-isr)
+
+Generado por premium-factory a partir de los archivos presentes; si el stack cambia, actualiza esta regla.
+
+## Principios (aplican siempre)
+- Evidence over claims: verificar con el comando del stack antes de declarar algo terminado.
+- Cambios mínimos y reversibles; nada de reformateos que ensucien el diff.
+- Un fix = un test que lo reproduce. Un feature = su test.
+- Secrets jamás en el repo: variables de entorno o `.env` ignorado.
+
+## Stacks detectados: web-estatico
+
+### Web estática
+- HTML/CSS/JS sin build: mantener el repo autocontenido; validar abriendo `index.html` o con servidor local.
