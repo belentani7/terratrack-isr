@@ -6,7 +6,7 @@ Instrucciones para agentes de código (Cursor, Claude Code, Codex, Gemini CLI).
 
 ## Ciclo de verificación
 
-- Verificación manual: revisar el README.
+- Servir el simulador: `python -m http.server` y abrir http://localhost:8000 — comprobar mapa, sensores y alertas. Tests: `node --test tests/`.
 
 ## Reglas
 

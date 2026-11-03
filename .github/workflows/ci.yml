@@ -19,3 +19,5 @@ jobs:
         run: |
           grep -qi '<!doctype html' index.html
           grep -qi 'name="viewport"' index.html
+      - name: Tests (node --test)
+        run: node --test tests/
