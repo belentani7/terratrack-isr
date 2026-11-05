@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TerraTrack ISR — Plataforma de Seguimiento Táctico</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>terratrack-isr — Repositorio terratrack-isr — parte del ecosistema Belentani</title>
+  <meta name="description" content="Repositorio terratrack-isr — parte del ecosistema Belentani">
+  <link rel="stylesheet" href="hero.css">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <script defer src="hero.js"></script>
 </head>
 <body>
-<div id="app">
-  <header id="topbar">
-    <div class="brand">
-      <span class="logo">◈</span>
-      <div>
-        <h1>TERRATRACK <em>ISR</em></h1>
-        <span class="sub">Intelligence · Surveillance · Reconnaissance</span>
+  <nav class="nav">
+    <a href="#" class="logo">terratrack-isr</a>
+    <ul class="nav-links">
+      <li><a href="#features">Características</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#about">Acerca de</a></li>
+    </ul>
+    <a href="#" class="cta">Empezar</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-canvas-wrapper">
+      <canvas id="hero-canvas"></canvas>
+    </div>
+    <div class="hero-overlay">
+      <h1>terratrack-isr</h1>
+      <p>Repositorio terratrack-isr — parte del ecosistema Belentani</p>
+      <div class="hero-actions">
+        <a href="#features" class="btn-primary">Ver características</a>
+        <a href="#stack" class="btn-secondary">Ver stack</a>
       </div>
     </div>
-    <div class="status-chips">
-      <div class="chip" id="chipClock">--:--:--Z</div>
-      <div class="chip ok" id="chipSensors">SENSORES 0/0</div>
-      <div class="chip" id="chipTracks">PISTAS 0</div>
-      <div class="chip warn" id="chipAlerts" hidden>⚠ <span id="alertCount">0</span></div>
-    </div>
-    <div class="controls">
-      <button id="btnPlay" class="btn primary" title="Pausar/Reanudar (Espacio)">⏸ Pausa</button>
-      <label class="speed">VEL
-        <input type="range" id="speed" min="1" max="32" step="1" value="4">
-        <span id="speedVal">4×</span>
-      </label>
-      <button id="btnReset" class="btn">⟲ Reiniciar</button>
-    </div>
-  </header>
+  </section>
 
-  <main id="layout">
-    <!-- Panel izquierdo: sensores -->
-    <aside id="sensorPanel" class="panel">
-      <h2>REDES DE SENSORES</h2>
-      <div id="sensorList" class="list"></div>
-      <h2>CAPAS</h2>
-      <div id="layerToggles" class="list"></div>
-    </aside>
-
-    <!-- Centro: mapa táctico -->
-    <section id="mapWrap">
-      <canvas id="map"></canvas>
-      <div id="mapInfo">
-        <span id="cursorPos">—</span>
-        <span id="scaleBar"></span>
+  <section class="section" id="features">
+    <h2>Características</h2>
+    <p>Producto completo con landing page hero, shader WebGL animado, y stack moderno listo para producción.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>🚀 Hero con Shader WebGL</h3>
+        <p>Fondo animado con FBM (Fractal Brownian Motion), parallax de ratón y modo de bajo consumo.</p>
       </div>
-      <div id="trackTooltip" hidden></div>
-    </section>
-
-    <!-- Panel derecho: pistas -->
-    <aside id="trackPanel" class="panel">
-      <h2>PISTAS ACTIVAS</h2>
-      <div id="trackList" class="list"></div>
-      <h2>REGISTRO DE EVENTOS</h2>
-      <div id="eventLog" class="log"></div>
-    </aside>
-  </main>
-
-  <footer id="detailBar" class="detail" hidden>
-    <div class="dhead">
-      <strong id="dId"></strong>
-      <span id="dType" class="tag"></span>
-      <span id="dClass" class="tag"></span>
-      <button id="dClose" class="btn small">✕</button>
+      <div class="card">
+        <h3>📱 Responsive</h3>
+        <p>Diseño adaptable a móvil, tableta y desktop con Tailwind CSS.</p>
+      </div>
+      <div class="card">
+        <h3>⚡ Rápido</h3>
+        <p>Sin dependencias pesadas para el hero. Carga instantánea y DPR limitado.</p>
+      </div>
+      <div class="card">
+        <h3>🔒 Seguro</h3>
+        <p>Sin secretos hardcodeados. Variables de entorno para claves sensibles.</p>
+      </div>
     </div>
-    <div class="dbody">
-      <div>POS <b id="dPos"></b></div>
-      <div>COG <b id="dCog"></b></div>
-      <div>SOG <b id="dSog"></b></div>
-      <div>ALT <b id="dAlt"></b></div>
-      <div>FUENTES <b id="dSrc"></b></div>
-      <div>CONFIANZA <b id="dConf"></b></div>
-      <div class="dwide">HISTORIAL <b id="dHist"></b></div>
-    </div>
+  </section>
+
+  <section class="section" id="stack">
+    <h2>Stack Tecnológico</h2>
+    <p>Tecnologías utilizadas en este repositorio.</p>
+    <ul class="stack-list">
+      
+    </ul>
+  </section>
+
+  <section class="section" id="about">
+    <h2>Acerca de terratrack-isr</h2>
+    <p>Este repositorio forma parte del ecosistema Belentani. Código abierto bajo licencia MIT. Documentación completa y tests incluidos.</p>
+  </section>
+
+  <footer>
+    <p>© 2026 terratrack-isr — Parte del ecosistema Belentani / NOIACORE</p>
   </footer>
-</div>
 
-<script type="module" src="js/main.js?v=3"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      window.initHeroShader('hero-canvas', '#0ea5e9', '#7c3aed');
+    });
+  </script>
 </body>
 </html>
