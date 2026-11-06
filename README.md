@@ -1,5 +1,9 @@
 # TerraTrack ISR
 
+<p><img src="https://github.com/belentani7/terratrack-isr/actions/workflows/ci.yml/badge.svg" alt="CI" style="vertical-align:middle">
+  <img src="https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&style=flat-square" alt="Dependabot">
+  <img src="https://img.shields.io/website?url=https%3A%2F%2Fbelentani7.github.io%2Fterratrack-isr%2F&label=demo&style=flat-square&color=2bb673" alt="demo live"></p>
+
 Plataforma de seguimiento táctico tipo ISR (Intelligence · Surveillance · Reconnaissance),
 100% autocontenida en vanilla JS/Canvas — sin dependencias ni backend.
 
