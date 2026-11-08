@@ -1,71 +1,107 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TerraTrack ISR — Plataforma de Seguimiento Táctico</title>
+<meta name="description" content="Plataforma de seguimiento táctico tipo ISR (Intelligence · Surveillance · Reconnaissance) 100% autocontenida en vanilla JS/Canvas — sin dependencias ni backend.">
+<link rel="canonical" href="https://belentani7.github.io/terratrack-isr/">
+<meta name="theme-color" content="#06090d">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TerraTrack ISR">
+<meta property="og:title" content="TerraTrack ISR — Plataforma de Seguimiento Táctico">
+<meta property="og:description" content="Plataforma de seguimiento táctico tipo ISR en vanilla JS/Canvas: mapa táctico, sensores realistas, fusión de pistas, clasificación progresiva y alertas.">
+<meta property="og:url" content="https://belentani7.github.io/terratrack-isr/">
+<meta name="twitter:card" content="summary">
+
+<!-- Tema: evitar FOUC -->
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('ux-theme');
+      document.documentElement.setAttribute('data-theme', t || 'dark');
+    } catch (e) {}
+    document.documentElement.classList.add('uxjs');
+  })();
+</script>
+<!-- Acento táctico con contraste AA -->
+<style>:root{--ux-accent:#35e0c8}[data-theme="dark"]{--ux-accent:#35e0c8}</style>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="assets/ux/ux-tokens.css">
+<link rel="stylesheet" href="assets/ux/ux-enhance.css">
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/dist/gsap.min.js'"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/dist/ScrollTrigger.min.js'"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/dist/SplitText.min.js'"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/lenis@1.3.27/dist/lenis.min.js'"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lucide@1.70.0/dist/umd/lucide.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/lucide@1.70.0/dist/umd/lucide.min.js'"></script>
+<script defer src="assets/ux/ux-kit.js"></script>
 </head>
 <body>
+<div data-ux-progress aria-hidden="true"></div>
+<a class="ux-skip" href="#layout">Saltar al contenido principal</a>
+
 <div id="app">
-  <header id="topbar">
-    <div class="brand">
-      <span class="logo">◈</span>
+  <header id="topbar" role="banner">
+    <div class="brand" aria-label="TerraTrack ISR">
+      <span class="logo" aria-hidden="true">◈</span>
       <div>
         <h1>TERRATRACK <em>ISR</em></h1>
         <span class="sub">Intelligence · Surveillance · Reconnaissance</span>
       </div>
     </div>
-    <div class="status-chips">
-      <div class="chip" id="chipClock">--:--:--Z</div>
-      <div class="chip ok" id="chipSensors">SENSORES 0/0</div>
-      <div class="chip" id="chipTracks">PISTAS 0</div>
-      <div class="chip warn" id="chipAlerts" hidden>⚠ <span id="alertCount">0</span></div>
+    <div class="status-chips" role="status" aria-live="polite" aria-label="Estado del sistema">
+      <div class="chip" id="chipClock" aria-label="Reloj Zulu">--:--:--Z</div>
+      <div class="chip ok" id="chipSensors" aria-label="Sensores activos">SENSORES 0/0</div>
+      <div class="chip" id="chipTracks" aria-label="Pistas activas">PISTAS 0</div>
+      <div class="chip warn" id="chipAlerts" hidden aria-label="Alertas activas">⚠ <span id="alertCount">0</span></div>
     </div>
-    <div class="controls">
-      <button id="btnPlay" class="btn primary" title="Pausar/Reanudar (Espacio)">⏸ Pausa</button>
-      <label class="speed">VEL
-        <input type="range" id="speed" min="1" max="32" step="1" value="4">
-        <span id="speedVal">4×</span>
+    <div class="controls" role="group" aria-label="Controles de simulación">
+      <button id="btnPlay" class="btn primary" aria-label="Pausar o reanudar simulación (Espacio)" title="Pausar/Reanudar (Espacio)">⏸ Pausa</button>
+      <label class="speed" for="speed">VEL
+        <input type="range" id="speed" min="1" max="32" step="1" value="4" aria-label="Velocidad de simulación">
+        <span id="speedVal" aria-live="polite">4×</span>
       </label>
-      <button id="btnReset" class="btn">⟲ Reiniciar</button>
+      <button id="btnReset" class="btn" aria-label="Reiniciar simulación">⟲ Reiniciar</button>
     </div>
   </header>
 
-  <main id="layout">
+  <main id="layout" role="main">
     <!-- Panel izquierdo: sensores -->
-    <aside id="sensorPanel" class="panel">
+    <aside id="sensorPanel" class="panel" data-ux-reveal aria-label="Redes de sensores">
       <h2>REDES DE SENSORES</h2>
-      <div id="sensorList" class="list"></div>
+      <div id="sensorList" class="list" role="list" aria-label="Lista de sensores"></div>
       <h2>CAPAS</h2>
-      <div id="layerToggles" class="list"></div>
+      <div id="layerToggles" class="list" role="list" aria-label="Capas del mapa"></div>
     </aside>
 
     <!-- Centro: mapa táctico -->
-    <section id="mapWrap">
-      <canvas id="map"></canvas>
-      <div id="mapInfo">
+    <section id="mapWrap" data-ux-reveal aria-label="Mapa táctico">
+      <canvas id="map" aria-label="Lienzo del mapa táctico" role="img"></canvas>
+      <div id="mapInfo" aria-hidden="true">
         <span id="cursorPos">—</span>
         <span id="scaleBar"></span>
       </div>
-      <div id="trackTooltip" hidden></div>
+      <div id="trackTooltip" hidden aria-live="polite"></div>
     </section>
 
     <!-- Panel derecho: pistas -->
-    <aside id="trackPanel" class="panel">
+    <aside id="trackPanel" class="panel" data-ux-reveal aria-label="Pistas y eventos">
       <h2>PISTAS ACTIVAS</h2>
-      <div id="trackList" class="list"></div>
+      <div id="trackList" class="list" role="list" aria-label="Lista de pistas activas"></div>
       <h2>REGISTRO DE EVENTOS</h2>
-      <div id="eventLog" class="log"></div>
+      <div id="eventLog" class="log" role="log" aria-live="polite" aria-label="Registro de eventos"></div>
     </aside>
   </main>
 
-  <footer id="detailBar" class="detail" hidden>
+  <footer id="detailBar" class="detail" hidden role="region" aria-label="Detalle de pista seleccionada">
     <div class="dhead">
       <strong id="dId"></strong>
-      <span id="dType" class="tag"></span>
-      <span id="dClass" class="tag"></span>
-      <button id="dClose" class="btn small">✕</button>
+      <span id="dType" class="tag" aria-label="Tipo"></span>
+      <span id="dClass" class="tag" aria-label="Clasificación"></span>
+      <button id="dClose" class="btn small" aria-label="Cerrar detalle">✕</button>
     </div>
     <div class="dbody">
       <div>POS <b id="dPos"></b></div>

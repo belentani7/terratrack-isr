@@ -175,6 +175,14 @@ footer {
   section { padding: 2rem 1rem; }
 }
 </style>
+  <!-- ux-kit v1 :: mejora progresiva (GSAP+Lenis CDN con fallback; seguro offline) -->
+  <script>document.documentElement.classList.add('uxjs')</script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="../assets/ux/ux-enhance.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/gsap/dist/gsap.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/gsap/dist/gsap.min.js'"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/gsap/dist/ScrollTrigger.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/gsap/dist/ScrollTrigger.min.js'"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/lenis@1.3.27/dist/lenis.min.js'"></script>
+  <script defer src="../assets/ux/ux-kit.js"></script>
 </head>
 <body>
   <section class="hero">
