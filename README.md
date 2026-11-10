@@ -1,4 +1,4 @@
-# TerraTrack ISR
+﻿# TerraTrack ISR
 
 <p><img src="https://github.com/belentani7/terratrack-isr/actions/workflows/ci.yml/badge.svg" alt="CI" style="vertical-align:middle">
   <img src="https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&style=flat-square" alt="Dependabot">
@@ -68,3 +68,74 @@ js/main.js      — UI y bucle principal (setInterval para sim, rAF para dibujo)
 | Demo desplegada | https://belentani7.github.io/terratrack-isr/ |
 
 Quality baseline: CI + Dependabot + CodeQL + reglas de agentes por [premium-factory](https://github.com/belentani7/premium-factory-api).
+
+<!-- repo-forge:readme:inicio -->
+## Qué es
+
+**TerraTrack ISR** — herramienta de seguimiento territorial (ISR).
+
+Una herramienta que se puede auditar: dice qué hace, lo hace, y deja rastro de lo que hizo.
+
+## Estado medido
+
+| Dato | Valor |
+|---|---|
+| Lenguajes | JavaScript, HTML, CSS, Markdown, JSON |
+| Archivos / líneas | 20 / 2032 |
+| Páginas HTML | 3 |
+| Tests detectados | 1 |
+| Cumplimiento de reglas | 34/34 (100.0%) |
+
+Todo lo anterior se midió en disco el 2026-11-10; no es una estimación.
+
+## Uso
+
+```bash
+python scripts/doctor.py   # verificación sin dependencias
+```
+
+## Estructura
+
+```
+assets/
+brand/
+css/
+data/
+docs/
+js/
+plataforma/
+producto/
+scripts/
+site/
+```
+
+## Diseño de plataforma
+
+- Series
+- Panel
+- Metodología
+
+La ficha completa —máximo potencial, marca, fases de monetización y recursos— vive en
+[`plataforma/FICHA.md`](plataforma/FICHA.md). Los tokens de marca están en
+[`brand/tokens.css`](brand/tokens.css).
+
+## Reglas del proyecto
+
+Este repositorio sigue el catálogo oficial del ecosistema (`GH-*`, `WEB-*`, `ACC-*`,
+`SEO-*`, `COH-*`, `DEV-*`). El gate se ejecuta con:
+
+```bash
+python scripts/doctor.py
+```
+
+## Licencia
+
+MIT. Ver [`LICENSE`](LICENSE).
+<!-- repo-forge:readme:fin -->
+<!-- repo-forge:readme:fin -->
+<!-- repo-forge:readme:fin -->
+<!-- repo-forge:readme:fin -->
+
+## Producto
+
+Oferta, precio y cobro: [`producto/OFERTA.md`](producto/OFERTA.md) · [`producto/precios.json`](producto/precios.json) · [`producto/landing.html`](producto/landing.html)

@@ -1,0 +1,17 @@
+{
+  "name": "TerraTrack ISR",
+  "short_name": "TerraTrack I",
+  "description": "herramienta de seguimiento territorial (ISR)",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1419",
+  "theme_color": "#40c5ff",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
