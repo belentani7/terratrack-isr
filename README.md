@@ -1,4 +1,4 @@
-﻿# TerraTrack ISR
+# TerraTrack ISR
 
 <p><img src="https://github.com/belentani7/terratrack-isr/actions/workflows/ci.yml/badge.svg" alt="CI" style="vertical-align:middle">
   <img src="https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&style=flat-square" alt="Dependabot">
