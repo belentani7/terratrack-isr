@@ -34,14 +34,17 @@ function buildSensorPanel() {
   const box = $("sensorList");
   box.innerHTML = "";
   for (const s of world.sensors) {
-    const el = document.createElement("div");
+    const el = document.createElement("button");
+    el.type = "button";
     el.className = "sensor on";
+    el.setAttribute("aria-pressed", "true");
     el.innerHTML = `
       <div class="row"><span class="nm">${s.name}</span><span class="st on">ACTIVO</span></div>
       <div class="meta">${s.kind} · ${s.range} km · (${s.x}, ${s.y})</div>`;
     el.onclick = () => {
       s.on = !s.on;
       el.classList.toggle("on", s.on);
+      el.setAttribute("aria-pressed", String(s.on));
       el.querySelector(".st").textContent = s.on ? "ACTIVO" : "OFF";
       el.querySelector(".st").className = `st ${s.on ? "on" : "off"}`;
       world.log("info", `${s.name} ${s.on ? "activado" : "desactivado"}`);
@@ -66,7 +69,8 @@ function renderTrackList() {
   const tracks = [...world.tracks].sort((a, b) => b.confidence - a.confidence);
   box.innerHTML = "";
   for (const t of tracks) {
-    const el = document.createElement("div");
+    const el = document.createElement("button");
+    el.type = "button";
     el.className = "track" + (map.selected === t ? " sel" : "");
     const stale = world.t - t.lastSeen > 30;
     const spd = Math.hypot(t.vx, t.vy) * 3600;

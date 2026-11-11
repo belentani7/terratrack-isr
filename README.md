@@ -1,70 +1,64 @@
 # TerraTrack ISR
 
-<p><img src="https://github.com/belentani7/terratrack-isr/actions/workflows/ci.yml/badge.svg" alt="CI" style="vertical-align:middle">
-  <img src="https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&style=flat-square" alt="Dependabot">
-  <img src="https://img.shields.io/website?url=https%3A%2F%2Fbelentani7.github.io%2Fterratrack-isr%2F&label=demo&style=flat-square&color=2bb673" alt="demo live"></p>
+TerraTrack ISR es una experiencia web autocontenida para explorar una consola de vigilancia marítima y fusión de sensores. Incluye una página de producto y una simulación interactiva que corre en el navegador, sin cuentas, dependencias de ejecución ni backend.
 
-Plataforma de seguimiento táctico tipo ISR (Intelligence · Surveillance · Reconnaissance),
-100% autocontenida en vanilla JS/Canvas — sin dependencias ni backend.
+> La consola muestra escenarios y contactos sintéticos. Es una demostración de interfaz y simulación, no un sistema operativo ni una fuente de datos reales.
 
-## Ejecutar
+## Producto
 
-```bash
-cd terratrack-isr
+- **Página de presentación:** propuesta de valor, capacidades, recorrido del producto y acceso directo a la demo.
+- **Mapa táctico:** terreno procedural, rejilla, zona protegida, coberturas y barrido de sensores.
+- **Escenario dinámico:** entidades aéreas, de superficie y subsuperficiales navegan por el área y cambian de rumbo.
+- **Sensores simulados:** radar, EO/IR, sonar y AIS; cada sensor se puede activar o desactivar.
+- **Fusión de pistas:** las detecciones actualizan confianza, clasificación, posición estimada e historial.
+- **Exploración:** capas de mapa, estelas, incertidumbre, velocidad variable, pausa, reinicio y detalle por pista.
+- **Adaptable:** consola utilizable en escritorio y pantallas pequeñas; controles con teclado y tacto.
+
+## Ejecutar localmente
+
+Desde PowerShell 5.1, en la carpeta del repositorio:
+
+```powershell
 python -m http.server 8642
-# abrir http://127.0.0.1:8642
 ```
 
-## Qué hace
+Abre `http://127.0.0.1:8642/` para la página de producto o `http://127.0.0.1:8642/app.html` para ir directamente a la consola. La demo necesita servirse por HTTP porque carga módulos JavaScript.
 
-- **Mapa táctico** en canvas: terreno procedural (costa/islas/aguas someras), rejilla km,
-  zona protegida, redes de sensores con barrido rotatorio.
-- **Simulación continua**: entidades aéreas, de superficie y subsuperficiales entran y
-  salen del área, navegan por waypoints y ejecutan maniobras evasivas aleatorias.
-- **Red de sensores realista**: 2 radares, EO/IR de dron, array de sonar (solo detecta
-  subs poco profundos) y fusión AIS. Cada sensor tiene alcance, probabilidad de
-  detección dependiente de la distancia y tipos detectables; se pueden activar/desactivar.
-- **Fusión de pistas**: las detecciones ruidosas alimentan un filtro alfa-beta por pista;
-  las pistas pasan de PENDIENTE a CONFIRMADA con 3 contactos, ganan confianza,
-  reducen su elipse de incertidumbre y hacen *dead-reckoning* entre detecciones
-  (indicador "SIN CONTACTO" si envejecen).
-- **Clasificación progresiva**: inicialmente DESCONOCIDO; el EO/IR y los contactos
-  sostenidos revelan la afiliación real (HOSTIL/AMIGO/NEUTRAL).
-- **Alertas**: un hostil (o desconocido de alta confianza) que penetra la zona protegida
-  dispara alerta parpadeante y queda marcado con ⚠ y doble marco.
-- **UI completa**: panel de sensores, capas conmutables (rejilla, estelas,
-  incertidumbre...), lista de pistas ordenada por confianza, registro de eventos con
-  reloj Zulu, tooltip y barra de detalle al hacer clic en una pista, control de
-  velocidad 1–32× y pausa (Espacio).
-- **Símbolos tipo NATO**: arco = aéreo, rectángulo = superficie, rombo = subsuperficial,
-  con vector de velocidad e historial de posiciones.
+## Controles de la consola
+
+- **Pausa / Reanudar:** botón de la barra superior o tecla Espacio.
+- **Velocidad:** control deslizante de 1× a 32×.
+- **Sensores y capas:** activa o desactiva elementos desde el panel izquierdo.
+- **Pistas:** selecciónalas en el mapa o en la lista para ver sus detalles.
+- **Reiniciar:** vuelve a cargar el escenario con entidades nuevas.
 
 ## Estructura
 
+```text
+index.html       Página de producto
+app.html         Consola de simulación
+hero.css         Estilos de la página de producto
+hero.js          Fondo WebGL del hero con alternativa sin WebGL
+css/style.css    Estilos de la consola
+js/main.js       Interfaz y bucle principal
+js/render.js     Renderizado del mapa Canvas
+js/sim.js        Entidades, sensores, terreno y fusión de pistas
+tests/           Pruebas estáticas y validación de sintaxis
 ```
-index.html      — layout de la consola
-css/style.css   — tema oscuro táctico
-js/sim.js       — entidades, sensores, fusión de pistas, mundo
-js/render.js    — mapa táctico en canvas
-js/main.js      — UI y bucle principal (setInterval para sim, rAF para dibujo)
+
+## Verificación
+
+```powershell
+node --test tests/
 ```
 
-## Notas técnicas
+## Proyecto
 
-- La simulación avanza con `setInterval` y el dibujo con `requestAnimationFrame`,
-  de modo que la simulación no se congela si la pestaña pierde visibilidad.
-- El `ResizeObserver` redimensiona el canvas cuando el layout está listo.
-- Los imports llevan `?v=` para evitar la caché del navegador durante el desarrollo.
----
+- Autor: Belentani / NOIACORE
+- Código: [github.com/belentani7/terratrack-isr](https://github.com/belentani7/terratrack-isr)
+- Contacto: [belentani7studio@proton.me](mailto:belentani7studio@proton.me)
+- Licencia: MIT
 
-## Ficha del proyecto
 
-| Campo | Valor |
-|---|---|
-| Autor | Belentani / NOIACORE |
-| Época de desarrollo | 2026 |
-| Contacto | [belentani7studio@proton.me](mailto:belentani7studio@proton.me) |
-| Código | https://github.com/belentani7/terratrack-isr |
-| Demo desplegada | https://belentani7.github.io/terratrack-isr/ |
-
-Quality baseline: CI + Dependabot + CodeQL + reglas de agentes por [premium-factory](https://github.com/belentani7/premium-factory-api).
+## Producto
+Véase `plataforma/OFERTA.md`, `plataforma/precios.json`, `plataforma/ONEPAGER.md`.
