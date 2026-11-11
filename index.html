@@ -1,120 +1,160 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TerraTrack ISR — Plataforma de Seguimiento Táctico</title>
-<meta name="description" content="Plataforma de seguimiento táctico tipo ISR (Intelligence · Surveillance · Reconnaissance) 100% autocontenida en vanilla JS/Canvas — sin dependencias ni backend.">
-<link rel="canonical" href="https://belentani7.github.io/terratrack-isr/">
-<meta name="theme-color" content="#06090d">
-<meta name="color-scheme" content="dark">
+<title>Terratrack Isr — Producto completo con hero shader</title>
+<meta name="description" content="Terratrack Isr: producto completo con home hero, shader WebGL animado y stack moderno listo para producción.">
+<meta name="generator" content="repo-superpowers-audit-v1">
+<meta property="og:title" content="Terratrack Isr — Producto completo con hero shader">
+<meta property="og:description" content="Producto completo con home hero, shader WebGL animado y stack moderno.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="TerraTrack ISR">
-<meta property="og:title" content="TerraTrack ISR — Plataforma de Seguimiento Táctico">
-<meta property="og:description" content="Plataforma de seguimiento táctico tipo ISR en vanilla JS/Canvas: mapa táctico, sensores realistas, fusión de pistas, clasificación progresiva y alertas.">
-<meta property="og:url" content="https://belentani7.github.io/terratrack-isr/">
-<meta name="twitter:card" content="summary">
-
-<!-- Tema: evitar FOUC -->
-<script>
-  (function () {
-    try {
-      var t = localStorage.getItem('ux-theme');
-      document.documentElement.setAttribute('data-theme', t || 'dark');
-    } catch (e) {}
-    document.documentElement.classList.add('uxjs');
-  })();
-</script>
-<!-- Acento táctico con contraste AA -->
-<style>:root{--ux-accent:#35e0c8}[data-theme="dark"]{--ux-accent:#35e0c8}</style>
-
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="assets/ux/ux-tokens.css">
-<link rel="stylesheet" href="assets/ux/ux-enhance.css">
-<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/dist/gsap.min.js'"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/dist/ScrollTrigger.min.js'"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/gsap@3.15.1/dist/SplitText.min.js'"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/lenis@1.3.27/dist/lenis.min.js'"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/lucide@1.70.0/dist/umd/lucide.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/lucide@1.70.0/dist/umd/lucide.min.js'"></script>
-<script defer src="assets/ux/ux-kit.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0a09'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23fbae04'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0b0a09;--bg2:#131110;--ink:#f4efe7;--dim:#a89f92;--accent:#fbae04;--accent2:#7fa88b;--line:rgba(244,239,231,.14);--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;--sans:ui-sans-serif,"Segoe UI",Inter,system-ui,-apple-system,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,monospace;--measure:62ch;--radius:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,4vw,40px);position:relative;z-index:1}
+a{color:var(--accent);text-decoration:none}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent2);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#12100e;padding:10px 16px;z-index:9}
+.skip:focus{left:12px;top:12px}
+header.site{border-bottom:1px solid var(--line);padding:22px 0;display:flex;gap:18px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-size:1.05rem;letter-spacing:.01em}
+.brand span{color:var(--dim)}
+nav.site{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+nav.site a{color:var(--dim);text-decoration:none}
+nav.site a:hover,nav.site a[aria-current=page]{color:var(--ink)}
+main{padding:clamp(48px,9vh,104px) 0}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+h1{font-family:var(--serif);font-size:clamp(2.4rem,7vw,5.2rem);line-height:.95;letter-spacing:-.03em;margin:0 0 24px;font-weight:500;text-wrap:balance}
+h2{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.1rem);line-height:1.15;letter-spacing:-.02em;margin:64px 0 18px;font-weight:500}
+h3{font-size:1.02rem;margin:28px 0 10px;letter-spacing:-.01em}
+p,li{max-width:var(--measure);color:var(--ink)}
+.lead{font-size:clamp(1.05rem,2vw,1.28rem);color:var(--dim);max-width:56ch}
+hr{border:0;border-top:1px solid var(--line);margin:clamp(40px,8vh,80px) 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:32px 0}
+.cell{background:var(--bg2);padding:22px 20px}
+.cell h3{margin-top:0}
+.cell p{font-size:.9rem;color:var(--dim);margin:0}
+code,kbd{font-family:var(--mono);font-size:.86em;background:rgba(244,239,231,.07);padding:2px 6px;border-radius:5px}
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:18px;overflow:auto;max-width:100%}
+pre code{background:none;padding:0}
+table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.pill{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);color:var(--dim);padding:3px 9px;border-radius:999px}
+footer.site{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--dim);font-size:.8rem}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+::selection{background:var(--accent);color:#12100e}
+.webgl-canvas{width:100%;height:400px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);margin:24px 0;display:block}
+.superpowers-badge{display:inline-block;font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--accent2);color:var(--accent2);padding:4px 10px;border-radius:999px;margin:10px 0}
+.stack{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-top:24px}
+.stack h3{margin-top:0}
+.stack ul{list-style:none;padding:0;margin:12px 0 0}
+.stack li{padding:8px 0;border-bottom:1px solid var(--line);color:var(--ink)}
+.stack li:last-child{border-bottom:none}
+.btn-stack{background:var(--accent);color:#12100e;border:none;padding:10px 24px;border-radius:6px;font-family:var(--sans);font-size:.95rem;cursor:pointer;margin-top:16px}
+.btn-stack:hover{transform:translateY(-2px)}
+.footer{margin-top:48px;padding:28px 0;border-top:1px solid var(--line);color:var(--dim);font-size:.8rem;text-align:center}
+</style>
 </head>
 <body>
-<div data-ux-progress aria-hidden="true"></div>
-<a class="ux-skip" href="#layout">Saltar al contenido principal</a>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site"><div class="wrap" style="display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap">
+<div class="brand">terratrack-isr <span>· ecosistema Belentani · WebGL online</span></div>
+<nav class="site" aria-label="Navegación principal"><a href="index.html" aria-current="page">Inicio</a><a href="docs.html">Documentación</a><a href="accesibilidad.html">Accesibilidad</a><a href="privacidad.html">Privacidad</a><a href="404.html">404</a></nav>
+</div></header>
+<main id="contenido"><div class="wrap">
+<a class="skip" href="#contenido">Saltar al contenido</a>
 
-<div id="app">
-  <header id="topbar" role="banner">
-    <div class="brand" aria-label="TerraTrack ISR">
-      <span class="logo" aria-hidden="true">◈</span>
-      <div>
-        <h1>TERRATRACK <em>ISR</em></h1>
-        <span class="sub">Intelligence · Surveillance · Reconnaissance</span>
-      </div>
+<header class="hero wrap">
+  <div class="hero-canvas"></div>
+  <div class="hero-overlay">
+    <h1>Terratrack Isr</h1>
+    <p>Producto completo con home hero, shader WebGL animado, y stack moderno listo para producción.</p>
+    <div class="hero-actions">
+      <a href="#stack" class="btn-stack">Ver Stack Tecnológico</a>
     </div>
-    <div class="status-chips" role="status" aria-live="polite" aria-label="Estado del sistema">
-      <div class="chip" id="chipClock" aria-label="Reloj Zulu">--:--:--Z</div>
-      <div class="chip ok" id="chipSensors" aria-label="Sensores activos">SENSORES 0/0</div>
-      <div class="chip" id="chipTracks" aria-label="Pistas activas">PISTAS 0</div>
-      <div class="chip warn" id="chipAlerts" hidden aria-label="Alertas activas">⚠ <span id="alertCount">0</span></div>
+  </div>
+</header>
+
+<section id="stack" class="wrap reveal" aria-labelledby="t-stack">
+  <h2 id="t-stack">Stack Tecnológico</h2>
+  <p class="sub">Tecnologías utilizadas en este repositorio.</p>
+  <div class="stack">
+    <ul>
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>JavaScript</li>
+      <li>WebGL Shader</li>
+      <li>Responsive Design</li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <h2>Contacto y trabajo</h2>
+  <p class="sub">Información práctica</p>
+  <div class="contacto">
+    <div>
+      <h3>Terratrack Isr</h3><p>Producto con shader WebGL del ecosistema belentani7.</p>
     </div>
-    <div class="controls" role="group" aria-label="Controles de simulación">
-      <button id="btnPlay" class="btn primary" aria-label="Pausar o reanudar simulación (Espacio)" title="Pausar/Reanudar (Espacio)">⏸ Pausa</button>
-      <label class="speed" for="speed">VEL
-        <input type="range" id="speed" min="1" max="32" step="1" value="4" aria-label="Velocidad de simulación">
-        <span id="speedVal" aria-live="polite">4×</span>
-      </label>
-      <button id="btnReset" class="btn" aria-label="Reiniciar simulación">⟲ Reiniciar</button>
+    <div class="datos">
+      <div class="dato"><strong>Proyecto</strong> Terratrack Isr</div>
+      <div class="dato"><strong>Tipo</strong> Sitio web con WebGL</div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main id="layout" role="main">
-    <!-- Panel izquierdo: sensores -->
-    <aside id="sensorPanel" class="panel" data-ux-reveal aria-label="Redes de sensores">
-      <h2>REDES DE SENSORES</h2>
-      <div id="sensorList" class="list" role="list" aria-label="Lista de sensores"></div>
-      <h2>CAPAS</h2>
-      <div id="layerToggles" class="list" role="list" aria-label="Capas del mapa"></div>
-    </aside>
-
-    <!-- Centro: mapa táctico -->
-    <section id="mapWrap" data-ux-reveal aria-label="Mapa táctico">
-      <canvas id="map" aria-label="Lienzo del mapa táctico" role="img"></canvas>
-      <div id="mapInfo" aria-hidden="true">
-        <span id="cursorPos">—</span>
-        <span id="scaleBar"></span>
-      </div>
-      <div id="trackTooltip" hidden aria-live="polite"></div>
-    </section>
-
-    <!-- Panel derecho: pistas -->
-    <aside id="trackPanel" class="panel" data-ux-reveal aria-label="Pistas y eventos">
-      <h2>PISTAS ACTIVAS</h2>
-      <div id="trackList" class="list" role="list" aria-label="Lista de pistas activas"></div>
-      <h2>REGISTRO DE EVENTOS</h2>
-      <div id="eventLog" class="log" role="log" aria-live="polite" aria-label="Registro de eventos"></div>
-    </aside>
-  </main>
-
-  <footer id="detailBar" class="detail" hidden role="region" aria-label="Detalle de pista seleccionada">
-    <div class="dhead">
-      <strong id="dId"></strong>
-      <span id="dType" class="tag" aria-label="Tipo"></span>
-      <span id="dClass" class="tag" aria-label="Clasificación"></span>
-      <button id="dClose" class="btn small" aria-label="Cerrar detalle">✕</button>
-    </div>
-    <div class="dbody">
-      <div>POS <b id="dPos"></b></div>
-      <div>COG <b id="dCog"></b></div>
-      <div>SOG <b id="dSog"></b></div>
-      <div>ALT <b id="dAlt"></b></div>
-      <div>FUENTES <b id="dSrc"></b></div>
-      <div>CONFIANZA <b id="dConf"></b></div>
-      <div class="dwide">HISTORIAL <b id="dHist"></b></div>
-    </div>
-  </footer>
-</div>
-
-<script type="module" src="js/main.js?v=3"></script>
+</div></main>
+<footer class="site"><div class="wrap">
+<p>terratrack-isr · WebGL listo para servir online · <a href="index.html">Inicio</a> · <a href="accesibilidad.html">Accesibilidad</a> · <a href="privacidad.html">Privacidad</a></p>
+</div></footer>
+<script>
+(function(){
+  const canvas = document.createElement('canvas');
+  canvas.id = 'hero-canvas';
+  canvas.style.position = 'absolute';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.style.zIndex = '1';
+  document.body.insertBefore(canvas, document.body.firstChild);
+  const gl = canvas.getContext('webgl');
+  if (!gl) return;
+  const vs = gl.createShader(gl.VERTEX_SHADER);
+  gl.shaderSource(vs, 'attribute vec2 position; void main() { gl_Position = vec4(position, 0.0, 1.0); }');
+  gl.compileShader(vs);
+  const fs = gl.createShader(gl.FRAGMENT_SHADER);
+  gl.shaderSource(fs, 'precision mediump float; uniform vec2 u_resolution; uniform float u_time; uniform vec2 u_mouse; float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); } float noise(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f); float a = hash(i); float b = hash(i + vec2(1.0, 0.0)); float c = hash(i + vec2(0.0, 1.0)); float d = hash(i + vec2(1.0, 1.0)); return mix(mix(a, b, f.x), mix(c, d, f.x), f.y); } float fbm(vec2 p) { float v = 0.0; float a = 0.5; vec2 shift = vec2(100.0); for (int i = 0; i < 5; ++i) { v += a * noise(p); p = p * 2.0 + shift; a *= 0.5; } return v; } void main() { vec2 uv = gl_FragCoord.xy / u_resolution.xy; uv.x *= u_resolution.x / u_resolution.y; vec2 m = uv - u_mouse; float n = fbm(uv * 3.0 + u_time * 0.5); n += fbm(uv * 6.0 - u_time * 0.3) * 0.5; n += length(m) * 0.1; n = mod(n, 1.0); vec3 color = mix(vec3(0.0, 0.5, 1.0), vec3(1.0, 0.0, 0.5), n); float vignette = 1.0 - length(uv * 2.0 - 1.0) * 0.4; color *= vignette; gl_FragColor = vec4(color, 1.0); }');
+  gl.compileShader(fs);
+  const program = gl.createProgram();
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  gl.useProgram(program);
+  const pb = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, pb);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+  const pl = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(pl);
+  gl.vertexAttribPointer(pl, 2, gl.FLOAT, false, 0, 0);
+  const rl = gl.getUniformLocation(program, 'u_resolution');
+  const tl = gl.getUniformLocation(program, 'u_time');
+  const ml = gl.getUniformLocation(program, 'u_mouse');
+  let mouse = {x: 0.5, y: 0.5};
+  window.addEventListener('mousemove', (e) => { mouse.x = e.clientX / window.innerWidth; mouse.y = 1.0 - e.clientY / window.innerHeight; });
+  function resize() { canvas.width = canvas.clientWidth * window.devicePixelRatio; canvas.height = canvas.clientHeight * window.devicePixelRatio; gl.viewport(0, 0, canvas.width, canvas.height); gl.uniform2f(rl, canvas.width, canvas.height); }
+  window.addEventListener('resize', resize);
+  resize();
+  function render(time) { gl.uniform1f(tl, time * 0.001); gl.uniform2f(ml, mouse.x, mouse.y); gl.drawArrays(gl.TRIANGLES, 0, 6); requestAnimationFrame(render); }
+  requestAnimationFrame(render);
+})();
+</script>
 </body>
 </html>
