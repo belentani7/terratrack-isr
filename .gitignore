@@ -2,3 +2,14 @@ __pycache__/
 *.pyc
 .DS_Store
 .env
+
+# repo-forge
+node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+.venv/
+*.log
+Thumbs.db
